@@ -1,4 +1,5 @@
-const { last } = require("lodash");
+import { last } from "lodash";
+import {drawData} from "./utils/dom";
 
 const apiUrl = 'http://localhost:3000';
 
@@ -6,17 +7,7 @@ const addBtn = document.getElementById('add'),
 deleteBtn = document.getElementById('delete'),
 wrapper = document.getElementById('data');
 
-const createDataElement = (element) => `<div data-user-id="${element.id}">
-    <span>ID: ${element.id}</span>
-    <span>Name: ${element.name}</span>
-    <span data-user-id="${element.id}" class="delete">X</span>
-    </div>`;
-
-const createData = (data) => 
-    data.map((element) => createDataElement(element)).join('');
-
-const drawData = (data, wrapper = document.body) => 
-    (wrapper.innerHTML = createData(data));    
+  
 
 fetch(apiUrl).then((response) => response.json()).then((data) => drawData(data, wrapper));
 
@@ -34,4 +25,6 @@ deleteBtn.addEventListener('click', () => {
     fetch(`${apiUrl}/delete`).then((response) => response.json()).then((data) => drawData(data, wrapper));
 })
 
+console.log(last([1, 2, 3]));
+console.log(last([1, 2, 3]));
 console.log(last([1, 2, 3]));
