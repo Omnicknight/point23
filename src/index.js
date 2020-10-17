@@ -1,3 +1,4 @@
+import Axios from "axios";
 import { last } from "lodash";
 import {drawData} from "./utils/dom";
 
@@ -8,22 +9,18 @@ const addBtn = document.getElementById('add'),
 deleteBtn = document.getElementById('delete'),
 wrapper = document.getElementById('data');
 
-  
-
-axios.get(apiUrl).then((data) => drawData(data, wrapper));
+Axios(apiUrl).then(response => drawData(response.data, wrapper));
 
 wrapper.addEventListener('click', (e) => {
     if (e.target.classList.contains('delete')) {
-        axios.get(`${apiUrl}/delete?id=${e.target.dataset.userId}`).then((data) => drawData(data, wrapper));
+        Axios.get(`${apiUrl}/delete?id=${e.target.dataset.userId}`).then(response => drawData(response.data, wrapper));
     }
 });
 
 addBtn.addEventListener('click', () => {
-    axios.get(`${apiUrl}/add`).then((data) => drawData(data, wrapper));
+    Axios.get(`${apiUrl}/add`).then(response => drawData(response.data, wrapper));
 })
 
 deleteBtn.addEventListener('click', () => {
-    axios.get(`${apiUrl}/delete`).then((data) => drawData(data, wrapper));
+    Axios.get(`${apiUrl}/delete`).then(response => drawData(response.data, wrapper));
 })
-
-console.log(last([1, 2, 3]));
