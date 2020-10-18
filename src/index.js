@@ -24,3 +24,4 @@ addBtn.addEventListener('click', () => {
 deleteBtn.addEventListener('click', () => {
     Axios.get(`${apiUrl}/delete`).then(response => drawData(response.data, wrapper));
 })
+
